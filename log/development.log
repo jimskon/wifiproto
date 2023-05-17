@@ -1,0 +1,244 @@
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE `wifi_development` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE DATABASE `wifi_test` DEFAULT CHARACTER SET `utf8mb4`[0m
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL PRIMARY KEY)[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) NOT NULL PRIMARY KEY, `value` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT GET_LOCK('7809574894674996555', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to CreateUsers (20230511230350)
+  [1m[35m (7.9ms)[0m  [1m[35mCREATE TABLE `users` (`id` bigint NOT NULL AUTO_INCREMENT PRIMARY KEY, `first` varchar(255), `last` varchar(255), `email` varchar(255), `phone` varchar(255), `address1` varchar(255), `address2` varchar(255), `city` varchar(255), `state` varchar(255), `zip` varchar(255), `type` varchar(255), `created_at` datetime(6) NOT NULL, `updated_at` datetime(6) NOT NULL)[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230511230350')[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2023-05-11 23:08:10.283054', '2023-05-11 23:08:10.283054')[0m
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT RELEASE_LOCK('7809574894674996555')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/" for 138.28.118.194 at 2023-05-11 23:51:33 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.7ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/skon/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/skon/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.4.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.5ms | Allocations: 633)
+Completed 200 OK in 14ms (Views: 5.3ms | ActiveRecord: 0.0ms | Allocations: 5344)
+
+
+Started GET "/users" for 138.28.118.194 at 2023-05-11 23:51:41 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 18.9ms | Allocations: 6972)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 31)
+  Rendered users/index.html.erb within layouts/application (Duration: 40.5ms | Allocations: 16414)
+  Rendered layout layouts/application.html.erb (Duration: 313.1ms | Allocations: 100920)
+Completed 200 OK in 317ms (Views: 311.5ms | ActiveRecord: 3.0ms | Allocations: 102545)
+
+
+Started POST "/users" for 138.28.118.194 at 2023-05-11 23:52:30 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first"=>"Jim", "last"=>"Skon", "email"=>"jimskon@hotmail.com", "phone"=>"740-358-9417", "address1"=>"123 poine", "address2"=>"", "city"=>"Gambier", "state"=>"Ohio", "zip"=>"43022", "type"=>"Snake"}, "commit"=>"Create User"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1206)
+
+
+  
+ActiveRecord::SubclassNotFound (The single-table inheritance mechanism failed to locate the subclass: 'Snake'. This error is raised because the column 'type' is reserved for storing the class in case of inheritance. Please rename this column if you didn't intend it to be used for storing the inheritance class or overwrite User.inheritance_column to use another column for that information.):
+  
+app/controllers/users_controller.rb:24:in `create'
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('7809574894674996555', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Migrating to RenameTypeToUserType (20230511235345)
+  [1m[35m (15.9ms)[0m  [1m[35mALTER TABLE `users` RENAME COLUMN `type` TO `usertype`[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20230511235345')[0m
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('7809574894674996555')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('7809574894674996555', 0)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('7809574894674996555')[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Started GET "/users" for 138.28.118.194 at 2023-05-11 23:56:16 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 10.4ms | Allocations: 5515)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 31)
+  Rendered users/index.html.erb within layouts/application (Duration: 25.2ms | Allocations: 15104)
+  Rendered layout layouts/application.html.erb (Duration: 70.2ms | Allocations: 47951)
+Completed 200 OK in 79ms (Views: 71.1ms | ActiveRecord: 1.8ms | Allocations: 51781)
+
+
+Started GET "/users" for 138.28.118.194 at 2023-05-11 23:56:19 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 2.6ms | Allocations: 2630)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 13)
+  Rendered users/index.html.erb within layouts/application (Duration: 4.8ms | Allocations: 3432)
+  Rendered layout layouts/application.html.erb (Duration: 7.5ms | Allocations: 5538)
+Completed 200 OK in 8ms (Views: 7.7ms | ActiveRecord: 0.4ms | Allocations: 5815)
+
+
+Started POST "/users" for 138.28.118.194 at 2023-05-11 23:57:01 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first"=>"bill", "last"=>"yeakus", "email"=>"asdasd@asdads.com", "phone"=>"234343244", "address1"=>"123 pione", "address2"=>"", "city"=>"gibbs", "state"=>"ohio", "zip"=>"43222", "type"=>"home"}, "commit"=>"Create User"}
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1029)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'type' for User.):
+  
+app/controllers/users_controller.rb:24:in `create'
+Started GET "/users" for 138.28.118.194 at 2023-05-11 23:59:03 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 10.0ms | Allocations: 5500)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 31)
+  Rendered users/index.html.erb within layouts/application (Duration: 25.9ms | Allocations: 15093)
+  Rendered layout layouts/application.html.erb (Duration: 67.0ms | Allocations: 47431)
+Completed 200 OK in 77ms (Views: 68.0ms | ActiveRecord: 1.8ms | Allocations: 51261)
+
+
+Started POST "/users" for 138.28.118.194 at 2023-05-11 23:59:36 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first"=>"sllim", "last"=>"caster", "email"=>"asddsasd@asdasd.edu", "phone"=>"123123123123", "address1"=>"13 poion", "address2"=>"", "city"=>"snakky", "state"=>"ohio", "zip"=>"23223", "type"=>"home"}, "commit"=>"Create User"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 1026)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'type' for User.):
+  
+app/controllers/users_controller.rb:24:in `create'
+Started GET "/users" for 138.28.118.194 at 2023-05-12 00:01:57 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 10.2ms | Allocations: 5381)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of templates [0 times] (Duration: 0.1ms | Allocations: 31)
+  Rendered users/index.html.erb within layouts/application (Duration: 26.1ms | Allocations: 14968)
+  Rendered layout layouts/application.html.erb (Duration: 69.8ms | Allocations: 47788)
+Completed 200 OK in 79ms (Views: 70.6ms | ActiveRecord: 1.7ms | Allocations: 51618)
+
+
+Started POST "/users" for 138.28.118.194 at 2023-05-12 00:02:07 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first"=>"sadasdsad", "last"=>"asdasd", "email"=>"asdasd", "phone"=>"adsad", "address1"=>"asd", "address2"=>"asdsa", "city"=>"asd", "state"=>"asdas", "zip"=>"asd", "usertype"=>"asdasd"}, "commit"=>"Create User"}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first`, `last`, `email`, `phone`, `address1`, `address2`, `city`, `state`, `zip`, `usertype`, `created_at`, `updated_at`) VALUES ('sadasdsad', 'asdasd', 'asdasd', 'adsad', 'asd', 'asdsa', 'asd', 'asdas', 'asd', 'asdasd', '2023-05-12 00:02:07.641526', '2023-05-12 00:02:07.641526')[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  Rendering users/create.turbo_stream.erb
+  Rendered users/_user.html.erb (Duration: 0.6ms | Allocations: 351)
+  Rendered users/_form.html.erb (Duration: 2.1ms | Allocations: 2481)
+  Rendered users/create.turbo_stream.erb (Duration: 5.8ms | Allocations: 4062)
+Completed 200 OK in 14ms (Views: 6.6ms | ActiveRecord: 1.6ms | Allocations: 8230)
+
+
+Started GET "/users/new" for 138.28.118.194 at 2023-05-12 00:02:13 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 2.5ms | Allocations: 2634)
+  Rendered users/new.html.erb within layouts/application (Duration: 3.4ms | Allocations: 2872)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 4978)
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.0ms | Allocations: 5324)
+
+
+Started GET "/users" for 138.28.118.194 at 2023-05-12 00:09:54 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 2.8ms | Allocations: 2654)
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of users/_user.html.erb [1 times] (Duration: 0.8ms | Allocations: 361)
+  Rendered users/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 4091)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 6197)
+Completed 200 OK in 11ms (Views: 10.6ms | ActiveRecord: 0.7ms | Allocations: 6474)
+
+
+Started POST "/users" for 138.28.118.194 at 2023-05-12 00:10:33 +0000
+Cannot render console from 138.28.118.194! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"first"=>"jim", "last"=>"skon", "email"=>"skon@kenyon.edu", "phone"=>"22234434", "address1"=>"798 winsap circle", "address2"=>"", "city"=>"howard", "state"=>"ohio", "zip"=>"43210", "usertype"=>"novoice"}, "commit"=>"Create User"}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO `users` (`first`, `last`, `email`, `phone`, `address1`, `address2`, `city`, `state`, `zip`, `usertype`, `created_at`, `updated_at`) VALUES ('jim', 'skon', 'skon@kenyon.edu', '22234434', '798 winsap circle', '', 'howard', 'ohio', '43210', 'novoice', '2023-05-12 00:10:33.895385', '2023-05-12 00:10:33.895385')[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (5.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:27:in `block in create'
+  Rendering users/create.turbo_stream.erb
+  Rendered users/_user.html.erb (Duration: 0.1ms | Allocations: 29)
+  Rendered users/_form.html.erb (Duration: 3.2ms | Allocations: 2480)
+  Rendered users/create.turbo_stream.erb (Duration: 4.0ms | Allocations: 2834)
+Completed 200 OK in 24ms (Views: 4.4ms | ActiveRecord: 6.4ms | Allocations: 5465)
+
+
+Started GET "/" for 138.28.72.178 at 2023-05-17 14:42:58 +0000
+Cannot render console from 138.28.72.178! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/skon/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/skon/.rbenv/versions/3.2.2/lib/ruby/gems/3.2.0/gems/railties-7.0.4.3/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.3ms | Allocations: 489)
+Completed 200 OK in 9ms (Views: 3.6ms | ActiveRecord: 0.0ms | Allocations: 3469)
+
+
+Started GET "/onwer" for 138.28.72.178 at 2023-05-17 14:43:04 +0000
+Cannot render console from 138.28.72.178! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/onwer"):
+  
+Started GET "/owner" for 138.28.72.178 at 2023-05-17 14:43:09 +0000
+Cannot render console from 138.28.72.178! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/owner"):
+  
+Started GET "/owners" for 138.28.72.178 at 2023-05-17 14:43:15 +0000
+Cannot render console from 138.28.72.178! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/owners"):
+  
+Started GET "/users" for 138.28.72.178 at 2023-05-17 14:43:27 +0000
+Cannot render console from 138.28.72.178! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by UsersController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering users/index.html.erb within layouts/application
+  Rendered users/_form.html.erb (Duration: 8.0ms | Allocations: 5126)
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users`[0m
+  ↳ app/views/users/index.html.erb:12
+  Rendered collection of users/_user.html.erb [2 times] (Duration: 0.8ms | Allocations: 398)
+  Rendered users/index.html.erb within layouts/application (Duration: 30.1ms | Allocations: 15092)
+  Rendered layout layouts/application.html.erb (Duration: 83.8ms | Allocations: 47707)
+Completed 200 OK in 88ms (Views: 83.2ms | ActiveRecord: 1.9ms | Allocations: 49281)
+
+
